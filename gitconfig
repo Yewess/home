@@ -1,0 +1,40 @@
+[user]
+	name = Chris Evich
+	# email = cevich@redhat.com
+	# email = chris-arduino@anonomail.me
+	# email = you@forgot.to.edit.gitconfig
+[color]
+	ui = auto
+[pager]
+	status = true
+	show-branch = true
+[format]
+	numbered = auto
+    cc =
+[core]
+	legacyheaders = false
+[repack]
+	usedeltabasedoffset = true
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+    br = branch
+    fp = format-patch --patience -M -C --find-copies-harder -o /tmp
+    fpcl = format-patch --patience -M -C --find-copies-harder --cover-letter -o /tmp
+[sendmail]
+	smtpserver = smtp.redhat.com
+	aliasesfile = /home/cevich/.gitaliases
+	aliasesfiletype = mutt
+	smtpserverport = 587
+	smtpuser = cevich
+	confirm = compose
+[diff]
+	renames = copy
+[rerere]
+	enabled = true
+[gc]
+	rerereunresolved = 7
+	rerereresolved = 14
+[push]
+	default = current

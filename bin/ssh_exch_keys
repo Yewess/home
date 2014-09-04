@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ "$#" -lt "1" ]
+then
+	echo "Please specify the hostame with which to exchange keys as the first parameter"
+	exit 1
+fi
+
+if [ -x ${HOME}/.ssh/id_rsa.pub ]
+then
+	ssh-keygen -q -t rsa -N "" -f ${HOME}/.ssh/id_rsa
+fi
+
+if [ -x ${HOME}/.ssh/id_rsa.pub ]
+then
+	echo "Error generating keys"
+	exit 2
+fi
+
+if ! [ -x ${HOME}/.ssh/authorized_keys ]
+then
+	touch ${HOME}/.ssh/authorized_keys
+	chmod go-rwx ${HOME}/.ssh/authorized_keys
+fi	
+
+cat ${HOME}/.ssh/id_rsa.pub | ssh $1 'umask 0700; mkdir -p ${HOME}/.ssh; cat - >> ${HOME}/.ssh/authorized_keys; if ! [ -x ${HOME}/.ssh/id_rsa.pub ]; then ssh-keygen -q -t rsa -N "" -f ${HOME}/.ssh/id_rsa; fi; cat ${HOME}/.ssh/id_rsa.pub' | cat - >> $HOME/.ssh/authorized_keys
+
+

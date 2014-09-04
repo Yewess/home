@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ "$#" -lt "1" ]; then
+	echo "Usage: `basename $0` <FileName>|<DirectoryName>"
+	exit 1;
+fi
+
+#sanity check?
+	echo "About to utterly destroy the following Files/Directories:"
+	echo "$@"
+	echo "Press any key to continue or CTRL-c to abort"
+	read -n 1 junk < "/proc/$$/fd/1"
+	unset $junk
+	chown -R $USER.$USER "$@"
+	chmod -R 700 "$@"
+	rm -rvf "$@"
+#sanity check?
