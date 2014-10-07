@@ -14,7 +14,7 @@ export EDITOR=/usr/bin/vim
 export AUTOTEST_PATH="$HOME/devel/test/autotest"
 
 # Send sound through ssh
-if [ -n "$SSH_CLIENT" ] && [ -x "/usr/bin/pax11publish"]
+if [ -n "$SSH_CLIENT" ] && [ -x "/usr/bin/pax11publish" ]
 then
     eval $(pax11publish -i)
 fi
