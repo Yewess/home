@@ -2,7 +2,7 @@
 	name = Chris Evich
 	# email = cevich@redhat.com
 	# email = chris-arduino@anonomail.me
-	# email = you@forgot.to.edit.gitconfig
+	email = you@forgot.to.edit.gitconfig
 [color]
 	ui = auto
 [pager]

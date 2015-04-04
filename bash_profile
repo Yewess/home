@@ -11,7 +11,7 @@ PATH=$PATH:$HOME/bin
 
 export PATH
 export EDITOR=/usr/bin/vim
-export AUTOTEST_PATH="$HOME/devel/test/autotest"
+export VIEWER=/usr/bin/vim
 
 # Send sound through ssh
 if [ -n "$SSH_CLIENT" ] && [ -x "/usr/bin/pax11publish" ]
