@@ -1,0 +1,23 @@
+--mode=c
+--style=google
+--max-code-length=80
+--indent-preproc-cond
+--indent-preproc-define
+# Indent 'class' and 'struct' access modifiers, 'public:',
+# 'protected:' and 'private:', one half indent.
+--indent-classes
+# Set the minimal indent that is added when a
+# header is built of multiple lines.
+--min-conditional-indent=0
+# Insert space padding around operators.
+--pad-oper
+# Attach a pointer or reference operator to the variable type
+--align-pointer=type
+# This option will align references separate from pointers.
+--align-reference=none
+# Remove brackets from conditional statements (e.g. 'if',
+# 'for', 'while'...). The statement must be a single statement
+# on a single line.
+--remove-brackets
+# Force use of the specified line end style.
+--lineend=linux
