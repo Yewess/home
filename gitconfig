@@ -38,3 +38,6 @@
 	rerereresolved = 14
 [push]
 	default = current
+[http]
+	sslverify = true
+	sslCAPath = /etc/pki/tls/certs
