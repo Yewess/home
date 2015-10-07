@@ -1,7 +1,7 @@
 [user]
 	name = Chris Evich
 	# email = cevich@redhat.com
-	# email = chris-arduino@anonomail.me
+	# email = chris-yewess@anonomail.me
 	email = you@forgot.to.edit.gitconfig
 [color]
 	ui = auto
@@ -17,7 +17,7 @@
 	usedeltabasedoffset = true
 [alias]
 	st = status
-	ci = commit
+	cm = commit
 	co = checkout
     br = branch
     fp = format-patch --patience -M -C --find-copies-harder -o /tmp
