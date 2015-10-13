@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES="astylerc bash_profile gitconfig vimrc"
+DOTFILES="astylerc bash_profile bashrc gitconfig vimrc"
 DIRS="bin"
 
 if ! [ -e "${PWD}/README.md" ] || ! [ -d "${PWD}/.git" ]
@@ -16,7 +16,7 @@ do
         echo "$DOTFILE not found: Script must be run from repository root"
         exit 2
     fi
-    rm "${HOME}/.${DOTFILE}"
+    rm -f "${HOME}/.${DOTFILE}"
     ln -s "$(basename $PWD)/${DOTFILE}" "${HOME}/.${DOTFILE}"
 done
 
