@@ -20,31 +20,36 @@ import sys
 import os
 from PIL import Image
 
-
 def showusage():
     _msg = ("Please specify the base url (ending in a '/') and "
             "path(s) to file(s) to convert\n")
     sys.stderr.write(_msg)
     sys.exit(1)
 
+class ThumbnailException(ValueError):
+    pass
 
 class Thumbnail(object):
 
     image = None
-    THUMB_FACT = 0.1
-    THUMB_METH = Image.LANCZOS
+    THUMB_FACT = 0.20
+    THUMB_METH = Image.ANTIALIAS
+    TOKEN = 'thumbnail'
+    SAVE_OPTS = { 'format': 'JPEG',
+                  'quality': 25,
+                  'optimize': True,
+                  'progressive': True }
 
     def __init__(self, filepath):
+        if Thumbnail.TOKEN in filepath or WebSize.TOKEN in filepath:
+            raise ThumbnailException(filepath)
         self.image = Image.open(filepath)
         self.filepath = filepath
 
     def save(self):
-        if self.filepath != self.thumb_filepath:
-            if not os.path.isfile(self.thumb_filepath):
-                self.image.thumbnail(self.thumb_size, self.THUMB_METH)
-                self.image.save(self.thumb_filepath, self.image.format)
-        else:
-            raise ValueError("%s == %s" % (self.filepath, self.thumb_filepath))
+        if not os.path.isfile(self.thumb_filepath):
+            self.image.thumbnail(self.thumb_size, self.THUMB_METH)
+            self.image.save(self.thumb_filepath, **self.SAVE_OPTS)
 
     @property
     def thumb_size(self):
@@ -59,12 +64,38 @@ class Thumbnail(object):
     @property
     def thumb_filename(self):
         filepath, extension = os.path.splitext(self.orig_filename)
-        return ("%s_thumbnail%s"
-                 % (filepath, extension))
+        return ("%s_%s%s"
+                 % (filepath, self.TOKEN, extension))
 
     @property
     def orig_filename(self):
         return os.path.basename(self.filepath)
+
+
+class WebSize(Thumbnail):
+
+    THUMB_FACT = 0.60
+    TOKEN = 'original'
+    SAVE_OPTS = { 'format': 'JPEG',
+                  'quality': 50,
+                  'optimize': True,
+                  'progressive': True }
+
+    @property
+    def thumb_filename(self):
+        return self.filepath
+
+    @property
+    def orig_filename(self):
+        filepath, extension = os.path.splitext(self.thumb_filename)
+        return "%s_%s%s" % (filepath, self.TOKEN, extension)
+
+    def save(self):
+        if self.filepath != self.orig_filename:
+            if not os.path.isfile(self.orig_filename):
+                os.rename(self.filepath, self.orig_filename)
+        #else:  # preserve _original file
+        super(WebSize, self).save()
 
 
 def bburl_thumb(thumbnail, baseurl):
@@ -86,11 +117,16 @@ def main(baseurl, filepaths):
     for filepath in filepaths:
         open(filepath, "rb")
     for filepath in filepaths:
-        thumbnail = Thumbnail(filepath)
-        msg = "\n%s\n" % bburl_thumb(thumbnail, baseurl)
-        thumbnail.save()
-        sys.stdout.write(msg)
-
+        for cls in (Thumbnail, WebSize):
+            try:
+                inst = cls(filepath)
+            except ThumbnailException:
+                continue
+            inst.save()
+            if cls == Thumbnail:
+                msg = "\n%s\n" % bburl_thumb(inst, baseurl)
+                sys.stdout.write(msg)
+                sys.stdout.flush()
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
