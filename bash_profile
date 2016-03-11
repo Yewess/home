@@ -22,6 +22,7 @@ fi
 if [ -z "$SSH_AGENT_PID" ]
 then
     eval $(ssh-agent -s -t 8H)
+    ssh-add
 fi
 
 export SSH_AGENT_PID
