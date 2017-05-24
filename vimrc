@@ -1,4 +1,15 @@
 version 6.0
+
+" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+" https://github.com/junegunn/vim-plug
+call plug#begin('~/.vim/plugged')
+
+" https://github.com/pearofducks/ansible-vim
+Plug 'pearofducks/ansible-vim', { 'for': 'ansible' }
+
+" Initialize plugin system
+call plug#end()
+
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
@@ -47,7 +58,6 @@ set bg=dark
 hi ExtraWhitespace ctermbg=darkgreen
 match ExtraWhitespace /\s\+\%#\@<!$/
 match ExtraWhitespace /\s\+$\| \+\ze\t/
-" match ExtraWhitespace /[^\t]\zs\t\+/
 autocmd InsertLeave * redraw!
 let c_space_errors = 1
 let python_space_errors = 1

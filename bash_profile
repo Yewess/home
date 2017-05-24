@@ -13,12 +13,6 @@ export PATH
 export EDITOR=/usr/bin/vim
 export VIEWER=/usr/bin/vim
 
-# Send sound through ssh
-if [ -n "$SSH_CLIENT" ] && [ -x "/usr/bin/pax11publish" ]
-then
-    eval $(pax11publish -i)
-fi
-
 if [ -z "$SSH_AGENT_PID" ]
 then
     eval $(ssh-agent -s -t 8H)
