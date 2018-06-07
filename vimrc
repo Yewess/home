@@ -1,15 +1,5 @@
 version 6.0
 
-" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
-" https://github.com/junegunn/vim-plug
-call plug#begin('~/.vim/plugged')
-
-" https://github.com/pearofducks/ansible-vim
-Plug 'pearofducks/ansible-vim', { 'for': 'ansible' }
-
-" Initialize plugin system
-call plug#end()
-
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
@@ -37,7 +27,6 @@ let &cpo=s:cpo_save
 unlet s:cpo_save
 set backspace=2
 set fileencodings=utf-8,latin1
-"set formatoptions=tcql
 set fo=ql
 set helplang=en
 set history=50
@@ -49,9 +38,11 @@ set termencoding=utf-8
 set viminfo='20,\"50
 set ts=4
 set sw=4
-set sta
+set nosta
 set sts=4
 set et
+set noai
+set nosi
 set spf="$HOME/.vimwords"
 set title
 set bg=dark
@@ -65,6 +56,7 @@ let python_space_errors = 1
 au BufRead,BufNewFile *.pde set filetype=cpp
 au BufRead,BufNewFile *.ino set filetype=cpp
 au BufRead,BufNewFile control set filetype=python
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CSCOPE settings for vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

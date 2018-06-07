@@ -7,17 +7,10 @@ fi
 
 # User specific environment and startup programs
 
-PATH=$PATH:$HOME/bin
+PATH=$HOME/bin:$PATH
 
 export PATH
 export EDITOR=/usr/bin/vim
 export VIEWER=/usr/bin/vim
-
-if [ -z "$SSH_AGENT_PID" ]
-then
-    eval $(ssh-agent -s -t 8H)
-    ssh-add
-fi
-
-export SSH_AGENT_PID
-export SSH_AUTH_SOCK
+export SYSTEMD_LESS=FRXMK
+export SYSTEMD_PAGER=less

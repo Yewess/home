@@ -1,6 +1,7 @@
 [user]
 	name = Chris Evich
 	# email = cevich@redhat.com
+	# signingkey = "E1C54FDC2E483472"
 	# email = chris-yewess@anonomail.me
 	email = you@forgot.to.edit.gitconfig
 [color]
@@ -41,3 +42,7 @@
 [http]
 	sslverify = true
 	sslCAPath = /etc/pki/tls/certs
+[commit]
+	gpgSign = true
+[gpg]
+	program = gpg2
