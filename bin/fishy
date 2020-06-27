@@ -1,0 +1,10 @@
+#!/bin/bash -l
+
+# This wrapper allows loading .profile / .bashrc environment prior to
+# entering 'fish'.  Enabling a similar environment in both shells.
+# N/B: This wrapper should be set as the shell for the user.
+
+# This is needed to keep vim happy
+export SHELL=/bin/bash
+
+exec -l /bin/fish "$@"

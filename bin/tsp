@@ -1,0 +1,18 @@
+#!/bin/bash -e
+
+current_session=$(tmux display-message -p '#S')
+
+case "$current_session" in
+    Personal)
+        target_session=Professional
+        ;;
+    Professional)
+        target_session=Personal
+        ;;
+    *)
+        echo "Unknown/Unsupported tmux session '$current_session'"
+        exit 1
+        ;;
+esac
+
+tmux switch-client -t $target_session

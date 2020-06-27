@@ -7,10 +7,9 @@ fi
 
 # User specific environment and startup programs
 
-PATH=$HOME/bin:$PATH
-
-export PATH
 export EDITOR=/usr/bin/vim
 export VIEWER=/usr/bin/vim
 export SYSTEMD_LESS=FRXMK
 export SYSTEMD_PAGER=less
+export GOPATH="$HOME/go"
+export PATH=$HOME/bin:$GOPATH/bin:$PATH
